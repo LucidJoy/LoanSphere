@@ -1,0 +1,1 @@
+ALTER TABLE "historical_data_prices" ALTER COLUMN "price_date" SET DATA TYPE text;

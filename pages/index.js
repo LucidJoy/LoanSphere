@@ -5,6 +5,7 @@ import { Check, Sparkles } from "lucide-react";
 import Button from "@/components/Button";
 import { Separator } from "@/components/ui/separator";
 import { MortgageContext } from "@/context/MortgageContext";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const { mortgageAmount, setMortgageAmount } = useContext(MortgageContext);
@@ -12,29 +13,7 @@ export default function Home() {
   return (
     <main>
       <div className='min-h-screen bg-gradient-to-b from-white via-white to-blue-300 flex flex-col items-center px-6 sm:px-12'>
-        <nav className='w-full flex justify-between items-center py-6'>
-          <div className='text-2xl font-bold'>⚡</div>
-          <div className='space-x-10'>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Historical
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Predicted
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Payment
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              About us
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Contact
-            </Link>
-          </div>
-          <div className='space-x-4'>
-            <Button text='Get Started' />
-          </div>
-        </nav>
+        <Navbar />
 
         <div className='flex flex-col lg:flex-row w-full max-w-6xl mt-12 lg:mt-24'>
           <div className='lg:w-1/2'>
