@@ -5,7 +5,8 @@ export const MortgageContext = createContext({});
 const MortgageProvider = ({ children }) => {
   const [mortgageAmount, setMortgageAmount] = useState(5000);
   const [usaState, setUsaState] = useState("");
-  const [regions, setRegions] = useState([]);
+  const [regions, setRegions] = useState([]); // all regions of the selected state
+  const [selectedRegion, setSelectedRegion] = useState("");
   const [houseType, setHouseType] = useState("");
 
   // Dates
@@ -14,6 +15,12 @@ const MortgageProvider = ({ children }) => {
 
   // Loadings
   const [regionLoader, setRegionLoader] = useState(false);
+
+  // graph data
+  const [graphPoints, setGraphPoints] = useState([]);
+
+  // API
+  // https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=CO&region_name=Boulder, CO&housing_type=2 - BedRoom&start_date=2014-01-31&end_date=2014-06-31
 
   return (
     <MortgageContext.Provider
@@ -32,6 +39,10 @@ const MortgageProvider = ({ children }) => {
         setStartDate,
         endDate,
         setEndDate,
+        selectedRegion,
+        setSelectedRegion,
+        graphPoints,
+        setGraphPoints,
       }}
     >
       {children}

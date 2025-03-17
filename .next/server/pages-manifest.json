@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/historical": "pages/historical.js"
+  "/historical": "pages/historical.js",
+  "/price-graph": "pages/price-graph.js"
 }

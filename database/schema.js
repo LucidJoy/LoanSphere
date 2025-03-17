@@ -15,7 +15,7 @@ import {
 export const historicalDataPrices = pgTable("historical_data_prices", {
   regionId: integer("region_id").notNull(),
   housingType: text("housing_type").notNull(),
-  priceDate: text("price_date").notNull(),
+  priceDate: date("price_date").notNull(),
   price: doublePrecision("price").notNull(),
 });
 

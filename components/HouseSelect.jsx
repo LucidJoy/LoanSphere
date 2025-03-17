@@ -13,8 +13,14 @@ import { Label } from "@/components/ui/label";
 import { MortgageContext } from "@/context/MortgageContext";
 
 const HouseSelect = ({ data }) => {
-  const { usaState, setUsaState, regionLoader, regions } =
-    useContext(MortgageContext);
+  const {
+    usaState,
+    setUsaState,
+    regionLoader,
+    regions,
+    houseType,
+    setHouseType,
+  } = useContext(MortgageContext);
 
   const isDisabled = regionLoader || !regions || regions.length === 0;
 
@@ -27,7 +33,11 @@ const HouseSelect = ({ data }) => {
         House Type
       </Label>
 
-      <Select disabled={isDisabled}>
+      <Select
+        disabled={isDisabled}
+        onValueChange={setHouseType}
+        value={houseType}
+      >
         <SelectTrigger id='select-house' className='w-[280px]'>
           <SelectValue placeholder='Select a house' />
         </SelectTrigger>

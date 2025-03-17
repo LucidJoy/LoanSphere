@@ -11,11 +11,9 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { MortgageContext } from "@/context/MortgageContext";
-import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
 
 const RegionSelect = ({ data }) => {
-  const { usaState, setUsaState, regionLoader, regions } =
+  const { regionLoader, regions, selectedRegion, setSelectedRegion } =
     useContext(MortgageContext);
 
   const isDisabled = regionLoader || !regions || regions.length === 0;
@@ -29,7 +27,11 @@ const RegionSelect = ({ data }) => {
         Region
       </Label>
 
-      <Select disabled={isDisabled}>
+      <Select
+        disabled={isDisabled}
+        onValueChange={setSelectedRegion}
+        value={selectedRegion}
+      >
         <SelectTrigger id='select-region' className='w-[280px]'>
           <SelectValue placeholder='Select a region' />
         </SelectTrigger>
