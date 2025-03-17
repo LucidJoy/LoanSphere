@@ -16,15 +16,6 @@ import {
 } from "@/components/ui/chart";
 import { MortgageContext } from "@/context/MortgageContext";
 
-// const chartData = [
-//   { price_date: "2014-01-31", price: 237323.41, price_mil: 0.237 },
-//   { price_date: "2014-02-28", price: 239044.46, price_mil: 0.239 },
-//   { price_date: "2014-03-31", price: 240357.34, price_mil: 0.24 },
-//   { price_date: "2014-04-30", price: 241536.59, price_mil: 0.241 },
-//   { price_date: "2014-05-31", price: 242966.27, price_mil: 0.242 },
-//   { price_date: "2014-06-30", price: 244435.94, price_mil: 0.244 },
-// ];
-
 const chartConfig = {
   historical: {
     label: "Historical Prices",
@@ -37,7 +28,14 @@ const chartConfig = {
 };
 
 const PriceGraph = () => {
-  const { regions, graphPoints } = useContext(MortgageContext);
+  const {
+    regions,
+    graphPoints,
+    houseType,
+    selectedRegion,
+    startDate,
+    endDate,
+  } = useContext(MortgageContext);
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-white via-white to-blue-300 flex flex-col items-center px-6 sm:px-12 overflow-hidden'>
@@ -58,9 +56,12 @@ const PriceGraph = () => {
         <Card>
           <CardHeader>
             <CardTitle>
-              Home Value Trends & Forecast for 5+ - BedRoom in Flagstaff, AZ
+              Home Value Trends & Forecast for <span>{houseType}</span> in{" "}
+              <span>{selectedRegion}</span>
             </CardTitle>
-            <CardDescription>April 2019 - April 2026</CardDescription>
+            <CardDescription>
+              {/* <span>{startDate}</span>-<span>{endDate}</span> */}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className='min-h-[400px]'>

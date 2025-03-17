@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/historical": "pages/historical.js",
-  "/price-graph": "pages/price-graph.js"
+  "/price-graph": "pages/price-graph.js",
+  "/": "pages/index.js"
 }
