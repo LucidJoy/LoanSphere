@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useContext } from "react";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-
-import { cn } from "@/lib/utils";
+import { format, addYears, subYears } from "date-fns";
+import {
+  CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -12,35 +15,46 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Label } from "./ui/label";
+import { cn } from "@/lib/utils";
 import { MortgageContext } from "@/context/MortgageContext";
+import { useContext } from "react";
+import * as React from "react";
 
 const DatePicker = ({ label, type }) => {
-  const { endDate, setEndDate, startDate, setStartDate } =
+  const { endDate, setEndDate, startDate, setStartDate, year, setYear } =
     useContext(MortgageContext);
+  const [month, setMonth] = React.useState(new Date());
+
+  const handlePreviousYear = () => {
+    const newYear = year - 1;
+    setYear(newYear);
+    setMonth((prevMonth) => subYears(prevMonth, 1));
+  };
+
+  const handleNextYear = () => {
+    const newYear = year + 1;
+    setYear(newYear);
+    setMonth((prevMonth) => addYears(prevMonth, 1));
+  };
 
   const selectedDate = type === "start" ? startDate : endDate;
   const setSelectedDate = type === "start" ? setStartDate : setEndDate;
 
   return (
-    <>
-      <Label
-        htmlFor='select-date'
-        className='font-normal font-mono tracking-wide text-gray-600 text-[18px]'
-      >
+    <div className='flex flex-col gap-2'>
+      <label className='font-normal font-mono tracking-wide text-gray-600 text-[18px]'>
         {label}
-      </Label>
-
+      </label>
       <Popover>
-        <PopoverTrigger asChild id='select-date'>
+        <PopoverTrigger asChild>
           <Button
             variant={"outline"}
             className={cn(
-              "w-[280px] justify-start text-left font-normal text-black px-4 py-6 mt-[4px] shadow-md",
+              "w-[280px] justify-start text-left font-normal text-black",
               !selectedDate && "text-muted-foreground"
             )}
           >
-            <CalendarIcon />
+            <CalendarIcon className='mr-2 h-4 w-4' />
             {selectedDate ? (
               format(selectedDate, "PPP")
             ) : (
@@ -50,15 +64,40 @@ const DatePicker = ({ label, type }) => {
         </PopoverTrigger>
 
         <PopoverContent className='w-auto p-0'>
+          <div className='flex items-center justify-between px-4 pt-3'>
+            <Button
+              variant='outline'
+              size='icon'
+              className='h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+              onClick={handlePreviousYear}
+            >
+              <ChevronsLeft className='h-4 w-4' />
+              <span className='sr-only'>Previous Year</span>
+            </Button>
+
+            <div className='text-sm font-medium'>{format(month, "yyyy")}</div>
+            <Button
+              variant='outline'
+              size='icon'
+              className='h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100'
+              onClick={handleNextYear}
+            >
+              <ChevronsRight className='h-4 w-4' />
+              <span className='sr-only'>Next Year</span>
+            </Button>
+          </div>
+
           <Calendar
             mode='single'
             selected={selectedDate}
             onSelect={setSelectedDate}
+            month={month}
+            onMonthChange={setMonth}
             initialFocus
           />
         </PopoverContent>
       </Popover>
-    </>
+    </div>
   );
 };
 

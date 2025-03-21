@@ -4,6 +4,7 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { format } from "date-fns";
 
 function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
   return (
@@ -13,7 +14,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
-        caption: "flex justify-center pt-1 relative items-center",
+        caption: "flex justify-center pt-1 relative items-center capitalize",
         caption_label: "text-sm font-medium",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
@@ -38,8 +39,8 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
-        // day_selected:
-        //   "bg-neutral-900 text-neutral-50 hover:bg-neutral-900 hover:text-neutral-50 focus:bg-neutral-900 focus:text-neutral-50",
+        day_selected:
+          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900 hover:text-neutral-50 focus:bg-neutral-900 focus:text-neutral-50",
         day_selected:
           "bg-neutral-900 text-black hover:bg-neutral-900 hover:text-black focus:bg-neutral-900 focus:text-white",
         day_today:
@@ -57,6 +58,11 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
         ),
         IconRight: ({ className, ...props }) => (
           <ChevronRight className={cn("h-4 w-4", className)} {...props} />
+        ),
+        CaptionLabel: ({ displayMonth }) => (
+          <span className='text-sm font-medium'>
+            {format(displayMonth, "MMMM")}
+          </span> // Only month name
         ),
       }}
       {...props}

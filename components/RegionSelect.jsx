@@ -13,10 +13,10 @@ import { Label } from "@/components/ui/label";
 import { MortgageContext } from "@/context/MortgageContext";
 
 const RegionSelect = ({ data }) => {
-  const { regionLoader, regions, selectedRegion, setSelectedRegion } =
+  const { regions, selectedRegion, setSelectedRegion } =
     useContext(MortgageContext);
 
-  const isDisabled = regionLoader || !regions || regions.length === 0;
+  const isDisabled = !regions || regions.length === 0;
 
   return (
     <>

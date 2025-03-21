@@ -14,8 +14,6 @@ import DatePicker from "@/components/DatePicker";
 import Button from "@/components/Button";
 import axios from "axios";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
-import { CoinsIcon } from "lucide-react";
 
 export const Icon = ({ className, ...rest }) => {
   return (
@@ -51,7 +49,6 @@ const Historical = () => {
 
   // get all regions from selected state
   useEffect(() => {
-    console.log("hi");
     try {
       setRegionLoader(true);
       const func = async () => {

@@ -9,9 +9,10 @@ const MortgageProvider = ({ children }) => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [houseType, setHouseType] = useState("");
 
-  // Dates
+  // Dates and Years
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [year, setYear] = useState(new Date().getFullYear());
 
   // Loadings
   const [regionLoader, setRegionLoader] = useState(false);
@@ -43,6 +44,8 @@ const MortgageProvider = ({ children }) => {
         setSelectedRegion,
         graphPoints,
         setGraphPoints,
+        year,
+        setYear,
       }}
     >
       {children}
