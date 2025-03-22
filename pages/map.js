@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import Map, { Marker } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Card } from "@/components/ui/card";
@@ -14,12 +14,32 @@ import DatePicker from "@/components/DatePicker";
 import { db } from "@/database/drizzle";
 import { historicalDataRegion } from "@/database/schema";
 import { eq } from "drizzle-orm";
+import Button from "@/components/Button";
+import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const MapPage = () => {
-  const { regions, usaState, setRegionLoader, setRegions } =
-    useContext(MortgageContext);
+  const {
+    regions,
+    usaState,
+    setRegionLoader,
+    setRegions,
+    selectedRegion,
+    houseType,
+    startDate,
+    endDate,
+    setGraphPoints,
+  } = useContext(MortgageContext);
+
+  const [markerAvgPrice, setMarkerAvgPrice] = useState(null);
+  const [mapLng, setMapLng] = useState(null);
+  const [mapLat, setMapLat] = useState(null);
 
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+  const mapRef = useRef(null);
+  const router = useRouter();
 
   // get all regions from selected state
   useEffect(() => {
@@ -42,31 +62,92 @@ const MapPage = () => {
     }
   }, [usaState]);
 
+  const handleClick = async () => {
+    try {
+      const res = await axios.get(
+        `https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=${usaState}&region_name=${selectedRegion}&housing_type=${houseType}&start_date=${
+          startDate.toISOString().split("T")[0]
+        }&end_date=${endDate.toISOString().split("T")[0]}`
+      );
+
+      // geocoding
+      const placeData = await axios.get(
+        `https://api.mapbox.com/search/geocode/v6/forward?q=${selectedRegion}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`
+      );
+
+      const [lng, lat] = placeData.data.features[0].geometry.coordinates;
+      setMapLng(lng);
+      setMapLat(lat);
+
+      // 🛩️ Move the map view
+      if (mapRef.current) {
+        mapRef.current.flyTo({
+          center: [lng, lat],
+          zoom: 10,
+          duration: 1000,
+        });
+      }
+
+      if (placeData && res.data.avg_price) {
+        setMarkerAvgPrice(res.data.avg_price);
+      }
+    } catch (error) {
+      toast(`Area not geocoded.`, { description: "Try different region." });
+      console.log(error);
+    }
+  };
+
+  const handleViewGraph = async () => {
+    try {
+      const res = await axios.get(
+        `https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=${usaState}&region_name=${selectedRegion}&housing_type=${houseType}&start_date=${
+          startDate.toISOString().split("T")[0]
+        }&end_date=${endDate.toISOString().split("T")[0]}`
+      );
+
+      if (res.data.data) {
+        setGraphPoints(res.data.data);
+        router.push("/price-graph");
+      }
+      toast("Displaying graph...");
+    } catch (error) {
+      toast(`Get Prices Error: ${error}`);
+    }
+  };
+
   return (
     <div className='min-h-screen bg-gradient-to-b from-white via-white to-blue-300 flex flex-col items-center px-6 sm:px-12 overflow-hidden'>
       <Navbar />
 
       <div className='w-full h-full py-6 flex flex-row items-center justify-between'>
-        <h1
-          className='text-[55px] font-normal text-gray-900 leading-tight font-coro'
-          onClick={() => console.log(startDate.toISOString().split("T")[0])}
-        >
+        <h1 className='text-[55px] font-normal text-gray-900 leading-tight font-coro'>
           Historical Map
         </h1>
 
-        {/* <Button text='Get Prices' onClick={handleClick} /> */}
+        <div className='flex flex-row items-center justify-center gap-[20px]'>
+          <Button
+            text='View Graph'
+            onClick={handleViewGraph}
+            disabled={
+              !usaState || !regions || !startDate || !endDate ? true : false
+            }
+          />
+          <Button text='Get Average Price' onClick={handleClick} />
+        </div>
       </div>
 
       {/* map */}
       <div className='flex flex-row gap-[10px] w-full h-full'>
         <div className='flex-[1.5] h-full w-full'>
           <Map
+            ref={mapRef}
             mapboxAccessToken={mapboxToken}
             initialViewState={{
-              longitude: -122.2,
-              latitude: 38.1,
+              longitude: -105.27869,
+              latitude: 40.01816,
               zoom: 10,
             }}
+            fadeDuration={10}
             mapStyle={"mapbox://styles/mapbox/outdoors-v12"}
             style={{
               height: "70vh",
@@ -74,11 +155,11 @@ const MapPage = () => {
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
             }}
           >
-            <Marker longitude={-122.2} latitude={38.1} anchor='bottom'>
+            <Marker longitude={mapLng} latitude={mapLat} anchor='bottom'>
               <div className='relative flex flex-col items-center'>
                 {/* Price Tag */}
                 <Card className='bg-[#A3000A] text-white font-normal px-2 py-1 rounded-full text-[11px] leading-[12px]'>
-                  $500K
+                  ${(markerAvgPrice / 1000000).toFixed(2)}M
                 </Card>
 
                 {/* Pointer Triangle */}
