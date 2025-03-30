@@ -13,12 +13,15 @@ const MortgageProvider = ({ children }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
+  const [predictionMonths, setPredictionMonths] = useState(6);
 
   // Loadings
   const [regionLoader, setRegionLoader] = useState(false);
+  const [predictPriceLoader, setPredictPriceLoader] = useState(false);
 
   // graph data
   const [graphPoints, setGraphPoints] = useState([]);
+  const [predictGraphData, setPredictGraphData] = useState(null);
 
   // API
   // https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=CO&region_name=Boulder, CO&housing_type=2 - BedRoom&start_date=2014-01-31&end_date=2014-06-31
@@ -46,6 +49,12 @@ const MortgageProvider = ({ children }) => {
         setGraphPoints,
         year,
         setYear,
+        predictPriceLoader,
+        setPredictPriceLoader,
+        predictGraphData,
+        setPredictGraphData,
+        predictionMonths,
+        setPredictionMonths,
       }}
     >
       {children}

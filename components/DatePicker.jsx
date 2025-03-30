@@ -45,12 +45,13 @@ const DatePicker = ({ label, type }) => {
       <label className='font-normal font-mono tracking-wide text-gray-600 text-[18px]'>
         {label}
       </label>
+
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
             className={cn(
-              "w-[280px] justify-start text-left font-normal text-black",
+              "w-[280px] justify-start text-left font-normal text-black py-6 shadow-md",
               !selectedDate && "text-muted-foreground"
             )}
           >

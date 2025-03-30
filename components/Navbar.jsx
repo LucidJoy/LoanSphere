@@ -41,7 +41,7 @@ const Navbar = () => {
           </PopoverContent>
         </Popover>
 
-        <Link href='/predictor' className='text-gray-700 hover:text-black'>
+        <Link href='/predicted' className='text-gray-700 hover:text-black'>
           Predicted
         </Link>
         <Link href='#' className='text-gray-700 hover:text-black'>
