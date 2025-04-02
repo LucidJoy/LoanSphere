@@ -77,6 +77,9 @@ const Predicted = () => {
 
   const handlePredictGraph = async () => {
     try {
+      // rate-limit
+      await axios.get("/api/check-limit");
+
       setPredictPriceLoader(true);
       const response = await axios.post(forecastEndpoint, {
         state: usaState,
@@ -92,7 +95,14 @@ const Predicted = () => {
 
       router.push("/predicted-graph");
     } catch (error) {
-      toast(`Get Prices Error: ${error}`);
+      if (error.response && error.response.status === 429) {
+        toast("Error: Too many requests, try again later.");
+      } else {
+        toast(`Prediction Error: ${error}`);
+      }
+
+      setPredictPriceLoader(false);
+    } finally {
       setPredictPriceLoader(false);
     }
   };

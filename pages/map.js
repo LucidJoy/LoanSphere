@@ -62,8 +62,10 @@ const MapPage = () => {
     }
   }, [usaState]);
 
-  const handleClick = async () => {
+  const handleGetAvgPrice = async () => {
     try {
+      await axios.get("/api/check-limit");
+
       const res = await axios.get(
         `https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=${usaState}&region_name=${selectedRegion}&housing_type=${houseType}&start_date=${
           startDate.toISOString().split("T")[0]
@@ -79,7 +81,7 @@ const MapPage = () => {
       setMapLng(lng);
       setMapLat(lat);
 
-      // 🛩️ Move the map view
+      // move the map view
       if (mapRef.current) {
         mapRef.current.flyTo({
           center: [lng, lat],
@@ -92,13 +94,18 @@ const MapPage = () => {
         setMarkerAvgPrice(res.data.avg_price);
       }
     } catch (error) {
-      toast(`Area not geocoded.`, { description: "Try different region." });
-      console.log(error);
+      if (error.response && error.response.status === 429) {
+        toast("Error: Too many requests, try again later.");
+      } else {
+        toast(`Area not geocoded.`, { description: "Try different region." });
+      }
     }
   };
 
   const handleViewGraph = async () => {
     try {
+      await axios.get("/api/check-limit");
+
       const res = await axios.get(
         `https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=${usaState}&region_name=${selectedRegion}&housing_type=${houseType}&start_date=${
           startDate.toISOString().split("T")[0]
@@ -109,9 +116,14 @@ const MapPage = () => {
         setGraphPoints(res.data.data);
         router.push("/price-graph");
       }
+
       toast("Displaying graph...");
     } catch (error) {
-      toast(`Get Prices Error: ${error}`);
+      if (error.response && error.response.status === 429) {
+        toast("Error: Too many requests, try again later.");
+      } else {
+        toast(`Get Prices Error: ${error}`);
+      }
     }
   };
 
@@ -132,7 +144,7 @@ const MapPage = () => {
               !usaState || !regions || !startDate || !endDate ? true : false
             }
           />
-          <Button text='Get Average Price' onClick={handleClick} />
+          <Button text='Get Average Price' onClick={handleGetAvgPrice} />
         </div>
       </div>
 
@@ -171,7 +183,7 @@ const MapPage = () => {
 
         {/* sidebar */}
         <div
-          className='flex-[0.5] glass h-[70vh] w-full rounded-[10px] py-[10px] -[20px] flex flex-col items-center'
+          className='flex-[0.5] glass h-[70vh] w-full rounded-[10px] py-[4px] flex flex-col items-center'
           style={{ boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}
         >
           <div className='flex flex-col items-center justify-center gap-[10px]'>

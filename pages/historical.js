@@ -68,8 +68,11 @@ const Historical = () => {
     }
   }, [usaState]);
 
-  const handleClick = async () => {
+  const handleGetPrice = async () => {
     try {
+      // rate-limit
+      await axios.get("/api/check-limit");
+
       const res = await axios.get(
         `https://gage-app-ggvzu.ondigitalocean.app/get-historical-data/?region_state=${usaState}&region_name=${selectedRegion}&housing_type=${houseType}&start_date=${
           startDate.toISOString().split("T")[0]
@@ -80,9 +83,14 @@ const Historical = () => {
         setGraphPoints(res.data.data);
         router.push("/price-graph");
       }
+
       toast("Displaying graph...");
     } catch (error) {
-      toast(`Get Prices Error: ${error}`);
+      if (error.response && error.response.status === 429) {
+        toast("Error: Too many requests, try again later.");
+      } else {
+        toast(`Error: ${error}`);
+      }
     }
   };
 
@@ -98,7 +106,7 @@ const Historical = () => {
           Historical Prices
         </h1>
 
-        <Button text='Get Prices' onClick={handleClick} />
+        <Button text='Get Prices' onClick={handleGetPrice} />
       </div>
 
       <div className='flex flex-row items-center gap-[160px] w-full h-[480px]'>
