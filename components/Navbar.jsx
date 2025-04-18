@@ -22,6 +22,7 @@ const Navbar = () => {
           <PopoverTrigger className='text-gray-700 hover:text-black'>
             Historical
           </PopoverTrigger>
+
           <PopoverContent className='w-fit px-[12px] py-[10px]'>
             <div className='flex flex-row items-center justify-between gap-[10px]'>
               <Link
@@ -41,9 +42,30 @@ const Navbar = () => {
           </PopoverContent>
         </Popover>
 
-        <Link href='/predicted' className='text-gray-700 hover:text-black'>
-          Predicted
-        </Link>
+        <Popover>
+          <PopoverTrigger className='text-gray-700 hover:text-black'>
+            Predicted
+          </PopoverTrigger>
+
+          <PopoverContent className='w-fit px-[12px] py-[10px]'>
+            <div className='flex flex-row items-center justify-between gap-[10px]'>
+              <Link
+                href='/predicted'
+                className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
+              >
+                Price
+              </Link>
+
+              <Link
+                href='/decision'
+                className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
+              >
+                Decision
+              </Link>
+            </div>
+          </PopoverContent>
+        </Popover>
+
         <Link href='#' className='text-gray-700 hover:text-black'>
           About us
         </Link>

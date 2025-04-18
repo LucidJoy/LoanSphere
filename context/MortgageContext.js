@@ -8,6 +8,7 @@ const MortgageProvider = ({ children }) => {
   const [regions, setRegions] = useState([]); // all regions of the selected state
   const [selectedRegion, setSelectedRegion] = useState("");
   const [houseType, setHouseType] = useState("");
+  const [occType, setOccType] = useState("");
 
   // Dates and Years
   const [startDate, setStartDate] = useState(null);
@@ -18,6 +19,7 @@ const MortgageProvider = ({ children }) => {
   // Loadings
   const [regionLoader, setRegionLoader] = useState(false);
   const [predictPriceLoader, setPredictPriceLoader] = useState(false);
+  const [predictDecisionLoader, setPredictDecisionLoader] = useState(false);
 
   // graph data
   const [graphPoints, setGraphPoints] = useState([]);
@@ -55,6 +57,10 @@ const MortgageProvider = ({ children }) => {
         setPredictGraphData,
         predictionMonths,
         setPredictionMonths,
+        occType,
+        setOccType,
+        predictDecisionLoader,
+        setPredictDecisionLoader,
       }}
     >
       {children}
