@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/tooltip";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export const Icon = ({ className, ...rest }) => {
   return (
@@ -24,7 +25,7 @@ export const Icon = ({ className, ...rest }) => {
   );
 };
 
-const User = ({ img, linkedin }) => {
+const User = ({ img, linkedin, name }) => {
   return (
     <div>
       <TooltipProvider>
@@ -45,6 +46,10 @@ const User = ({ img, linkedin }) => {
                 />
               </Link>
             </div>
+
+            <Badge className='rounded-full bg-white text-black cursor-default mt-[10px]'>
+              {name}
+            </Badge>
           </TooltipTrigger>
           <TooltipContent>
             <p>LinkedIn</p>

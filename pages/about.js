@@ -72,22 +72,30 @@ const About = () => {
 
       <div className='w-[90%] py-[50px]'>
         <div className='flex gap-[40px] items-center justify-between flex-wrap mt-[40px]'>
-          <User linkedin={"https://www.linkedin.com/in/lucidjoy/"} img={joy} />
+          <User
+            linkedin={"https://www.linkedin.com/in/lucidjoy/"}
+            img={joy}
+            name={"Jyotirmoy Karmakar"}
+          />
           <User
             linkedin={"https://www.linkedin.com/in/nikhiljk02/"}
             img={nikhil}
+            name={"Nikhil Jaswaraj Karkera"}
           />
           <User
             linkedin={"https://www.linkedin.com/in/archit-shukla06/"}
             img={archit}
+            name={"Archit Shukla"}
           />
           <User
             linkedin={"https://www.linkedin.com/in/tarun-kumar-n-796376219/"}
             img={tarun}
+            name={"Tarun Kumar Nagelli"}
           />
           <User
             linkedin={"https://www.linkedin.com/in/anushka-usingh/"}
             img={anushka}
+            name={"Anushka Singh"}
           />
         </div>
       </div>
