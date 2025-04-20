@@ -1,40 +1,30 @@
-import React, { useContext } from "react";
-import Link from "next/link";
+import React, { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Cover } from "@/components/ui/cover";
 import { Check, Sparkles } from "lucide-react";
 import Button from "@/components/Button";
 import { Separator } from "@/components/ui/separator";
 import { MortgageContext } from "@/context/MortgageContext";
+import Navbar from "@/components/Navbar";
+import { debounce } from "lodash";
 
 export default function Home() {
-  const { mortgageAmount, setMortgageAmount } = useContext(MortgageContext);
+  const { loanAmount, setLoanAmount } = useContext(MortgageContext);
+
+  const router = useRouter();
+
+  const navToDecision = () => {
+    router.push("/decision");
+  };
+
+  const handleLoanChange = debounce((val) => setLoanAmount(val), 100);
+
+  useEffect(() => setLoanAmount(5000), []);
 
   return (
     <main>
       <div className='min-h-screen bg-gradient-to-b from-white via-white to-blue-300 flex flex-col items-center px-6 sm:px-12'>
-        <nav className='w-full flex justify-between items-center py-6'>
-          <div className='text-2xl font-bold'>⚡</div>
-          <div className='space-x-10'>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Historical
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Predicted
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Payment
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              About us
-            </Link>
-            <Link href='#' className='text-gray-700 hover:text-black'>
-              Contact
-            </Link>
-          </div>
-          <div className='space-x-4'>
-            <Button text='Get Started' />
-          </div>
-        </nav>
+        <Navbar />
 
         <div className='flex flex-col lg:flex-row w-full max-w-6xl mt-12 lg:mt-24'>
           <div className='lg:w-1/2'>
@@ -46,7 +36,10 @@ export default function Home() {
               fierce — finding the right loan can seem difficult.
             </p>
             <div className='flex space-x-4 mt-6'>
-              <Button text='Get Started' />
+              <Button
+                text='Get Started'
+                onClick={() => router.push("/historical")}
+              />
             </div>
             <div className='mt-[30px] flex space-x-4 text-gray-700'>
               <span className='flex items-center gap-[4px]'>
@@ -68,7 +61,7 @@ export default function Home() {
                 Select Mortgage Amount
               </p>
               <p className='text-4xl font-bold text-gray-900 mt-[16px] font-mono'>
-                USD ${mortgageAmount}
+                USD ${loanAmount}
               </p>
               <div className='relative w-full mt-4'>
                 <input
@@ -80,7 +73,7 @@ export default function Home() {
                     WebkitAppearance: "none",
                     appearance: "none",
                   }}
-                  onChange={(e) => setMortgageAmount(e.target.value)}
+                  onChange={(e) => handleLoanChange(Number(e.target.value))}
                 />
                 <style jsx>{`
                   input[type="range"]::-webkit-slider-thumb {
@@ -110,7 +103,9 @@ export default function Home() {
               <div className='my-[20px]'>
                 <Separator />
               </div>
-              <Button text='Start Now' />
+
+              <Button text='Start Now' onClick={navToDecision} />
+
               <div className='mt-[30px] text-gray-600 text-sm'>
                 <p>👥 50,000+ Users</p>
                 <p className='mt-[6px]'>🔒 Safe And Market-Accurate</p>
