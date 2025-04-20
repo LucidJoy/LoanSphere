@@ -3,12 +3,13 @@ import React, { createContext, useState } from "react";
 export const MortgageContext = createContext({});
 
 const MortgageProvider = ({ children }) => {
-  const [mortgageAmount, setMortgageAmount] = useState(5000);
+  // const [mortgageAmount, setMortgageAmount] = useState(5000);
   const [usaState, setUsaState] = useState("");
   const [regions, setRegions] = useState([]); // all regions of the selected state
   const [selectedRegion, setSelectedRegion] = useState("");
   const [houseType, setHouseType] = useState("");
   const [occType, setOccType] = useState("");
+  const [loanAmount, setLoanAmount] = useState(5000);
 
   // Dates and Years
   const [startDate, setStartDate] = useState(null);
@@ -31,8 +32,6 @@ const MortgageProvider = ({ children }) => {
   return (
     <MortgageContext.Provider
       value={{
-        mortgageAmount,
-        setMortgageAmount,
         usaState,
         setUsaState,
         regions,
@@ -61,6 +60,8 @@ const MortgageProvider = ({ children }) => {
         setOccType,
         predictDecisionLoader,
         setPredictDecisionLoader,
+        loanAmount,
+        setLoanAmount,
       }}
     >
       {children}

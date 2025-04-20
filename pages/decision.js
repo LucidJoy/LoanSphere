@@ -42,10 +42,11 @@ const Decision = () => {
     predictDecisionLoader,
     setPredictDecisionLoader,
     occType,
+    loanAmount,
+    setLoanAmount,
   } = useContext(MortgageContext);
 
   // states
-  const [loanAmount, setLoanAmount] = useState(null);
   const [loanTerm, setLoanTerm] = useState(null);
   const [incomeState, setIncomeState] = useState(null);
   const [monthlyDebtState, setMonthlyDebtState] = useState(null);
@@ -142,6 +143,7 @@ const Decision = () => {
                 <Input
                   type='number'
                   id='loan-amount'
+                  value={loanAmount}
                   placeholder='Amount'
                   className='w-[280px] justify-start text-left font-normal text-black bg-white
                   shadow-md mt-[4px] border border-neutral-200 rounded-md ring-offset-white data-[placeholder]:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-950/35 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1'

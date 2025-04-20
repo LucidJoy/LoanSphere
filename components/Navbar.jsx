@@ -71,7 +71,10 @@ const Navbar = () => {
       </div>
       {router.pathname == "/" ? (
         <div className='space-x-4'>
-          <Button text='Get Started' />
+          <Button
+            text='Get Started'
+            onClick={() => router.push("/historical")}
+          />
         </div>
       ) : (
         <div className='space-x-4 opacity-0'></div>
