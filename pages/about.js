@@ -40,35 +40,24 @@ const About = () => {
 
       <div className='flex flex-row items-center gap-[160px] w-full'>
         <div className='text-gray-600 text-[16px]'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Exercitationem ex, dolore dolorum qui dignissimos sint, reiciendis
-          cupiditate, illo provident reprehenderit inventore. At quisquam
-          voluptate alias fugit harum exercitationem architecto quae,
-          necessitatibus debitis veniam eligendi iure consectetur delectus
-          minima magnam eveniet assumenda. Quos at eligendi consequuntur minima
-          explicabo impedit placeat officia totam eius aliquid, beatae sint quae
-          perferendis earum fugit obcaecati nostrum ut enim! Impedit dicta, nam
-          soluta deserunt consequuntur ipsam tempora mollitia ea? Sit a odio
-          dolore facere, atque impedit perspiciatis quas tempore iste doloribus,
-          corporis similique amet hic praesentium pariatur eligendi modi ducimus
-          dolor velit. Possimus tenetur, laudantium quasi laboriosam unde ipsam
-          iure sapiente odit temporibus aspernatur distinctio dolore labore
-          neque, consectetur corporis assumenda atque. Omnis est quod
-          dignissimos ullam accusamus nisi ut, itaque, natus, rerum blanditiis
-          quaerat cum ea at distinctio minus voluptas quas veritatis optio dolor
-          sunt soluta laborum? Doloribus vitae dolore dignissimos, adipisci
-          accusantium sequi debitis.
+          We are graduate students from the University of Colorado Boulder,
+          passionate about using technology to solve real-world problems. Loan
+          Sphere is our collaborative project—an intelligent loan analysis and
+          prediction platform designed to help users make smarter financial
+          decisions. The platform offers three core features: a loan approval
+          predictor, a historical mortgage rate explorer, and a future rate
+          forecasting tool. The loan approval model, built using XGBoost,
+          evaluates user inputs like income, loan amount, and term to deliver
+          real-time approval predictions via a Flask API, deployed on Google
+          Cloud Run using Docker and Artifact Registry. The historical price
+          tool helps users visualize trends over time, while the forecasting
+          model uses time series techniques to predict upcoming mortgage rate
+          movements. Loan Sphere reflects our shared passion for machine
+          learning, cloud computing, and intuitive design. It’s more than just a
+          class project—it’s our step toward building data-driven tools that
+          make finance more accessible and transparent.
         </div>
       </div>
-
-      {/* <div className='w-full h-full flex flex-row items-center justify-between py-[30px]'>
-        <h1
-          className='text-[55px] font-normal text-gray-900 leading-tight font-coro'
-          onClick={() => predictDecision()}
-        >
-          Team
-        </h1>
-      </div> */}
 
       <div className='w-[90%] py-[50px]'>
         <div className='flex gap-[40px] items-center justify-between flex-wrap mt-[40px]'>
