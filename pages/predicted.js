@@ -137,7 +137,7 @@ const Predicted = () => {
           className='text-[55px] font-normal text-gray-900 leading-tight font-coro'
           onClick={() => predictDecision()}
         >
-          Predicted Prices
+          Future Prices
         </h1>
 
         <Button
@@ -177,7 +177,12 @@ const Predicted = () => {
 
           <div className='w-full h-full flex flex-col items-center justify-center gap-[80px]'>
             <div className='flex flex-col'>
-              <DatePicker label='Start Date' type='start' />
+              <DatePicker
+                label='Start Date'
+                type='start'
+                fromDate={new Date("2014-01-31")}
+                toDate={new Date("2025-01-31")}
+              />
             </div>
 
             <div className='flex flex-col'>

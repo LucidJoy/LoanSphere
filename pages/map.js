@@ -183,7 +183,7 @@ const MapPage = () => {
 
         {/* sidebar */}
         <div
-          className='flex-[0.5] glass h-[70vh] w-full rounded-[10px] py-[4px] flex flex-col items-center'
+          className='flex-[0.5] glass h-[70vh] w-full rounded-[10px] py-[20px] overflow-y-scroll scrollbar-custom flex flex-col items-center justify-between'
           style={{ boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)" }}
         >
           <div className='flex flex-col items-center justify-center gap-[10px]'>
@@ -194,15 +194,23 @@ const MapPage = () => {
             <HouseSelect data={houseTypes} />
           </div>
 
-          <Separator className='w-[80%] bg-black mt-[20px] mb-[10px]' />
+          <Separator className='w-[80%] bg-black my-[20px]' />
 
           <div className='flex flex-col items-center justify-center gap-[10px]'>
             <div className='flex flex-col '>
-              <DatePicker label='Start Date' type='start' />
+              <DatePicker
+                label='Start Date'
+                type='start'
+                fromDate={new Date("2014-01-31")}
+              />
             </div>
 
             <div className='flex flex-col'>
-              <DatePicker label='End Date' type='end' />
+              <DatePicker
+                label='End Date'
+                type='end'
+                toDate={new Date("2025-01-31")}
+              />
             </div>
           </div>
         </div>

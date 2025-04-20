@@ -20,7 +20,7 @@ import { MortgageContext } from "@/context/MortgageContext";
 import { useContext } from "react";
 import * as React from "react";
 
-const DatePicker = ({ label, type }) => {
+const DatePicker = ({ label, type, fromDate, toDate }) => {
   const { endDate, setEndDate, startDate, setStartDate, year, setYear } =
     useContext(MortgageContext);
   const [month, setMonth] = React.useState(new Date());
@@ -95,6 +95,8 @@ const DatePicker = ({ label, type }) => {
             month={month}
             onMonthChange={setMonth}
             initialFocus
+            fromDate={fromDate}
+            toDate={toDate}
           />
         </PopoverContent>
       </Popover>

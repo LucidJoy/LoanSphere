@@ -123,3 +123,31 @@ body {
   -webkit-backdrop-filter: blur(0px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.scrollbar-custom {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.scrollbar-custom:hover::-webkit-scrollbar {
+  opacity: 1;
+}

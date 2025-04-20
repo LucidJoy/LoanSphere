@@ -19,8 +19,8 @@ const Navbar = () => {
       </div>
       <div className='space-x-10'>
         <Popover>
-          <PopoverTrigger className='text-gray-700 hover:text-black'>
-            Historical
+          <PopoverTrigger className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'>
+            Historical Prices
           </PopoverTrigger>
 
           <PopoverContent className='w-fit px-[12px] py-[10px]'>
@@ -42,34 +42,30 @@ const Navbar = () => {
           </PopoverContent>
         </Popover>
 
-        <Popover>
-          <PopoverTrigger className='text-gray-700 hover:text-black'>
-            Predicted
-          </PopoverTrigger>
+        <Link
+          href='/predicted'
+          className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
+        >
+          Future Prices
+        </Link>
 
-          <PopoverContent className='w-fit px-[12px] py-[10px]'>
-            <div className='flex flex-row items-center justify-between gap-[10px]'>
-              <Link
-                href='/predicted'
-                className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
-              >
-                Price
-              </Link>
+        <Link
+          href='/decision'
+          className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
+        >
+          Loan Approval
+        </Link>
 
-              <Link
-                href='/decision'
-                className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
-              >
-                Decision
-              </Link>
-            </div>
-          </PopoverContent>
-        </Popover>
-
-        <Link href='#' className='text-gray-700 hover:text-black'>
+        <Link
+          href='#'
+          className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
+        >
           About us
         </Link>
-        <Link href='#' className='text-gray-700 hover:text-black'>
+        <Link
+          href='#'
+          className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
+        >
           Contact
         </Link>
       </div>
