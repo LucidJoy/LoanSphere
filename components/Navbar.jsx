@@ -57,7 +57,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          href='#'
+          href='/about'
           className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
         >
           About us
