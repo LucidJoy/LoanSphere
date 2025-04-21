@@ -113,6 +113,12 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className='absolute bottom-[10px]'>
+          <p className='text-black/90 text-xs'>
+            Copyright © 2025 by LoanSphere, Inc. All rights reserved.
+          </p>
+        </div>
       </div>
     </main>
   );
