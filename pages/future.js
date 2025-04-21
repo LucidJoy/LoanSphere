@@ -36,7 +36,7 @@ export const Icon = ({ className, ...rest }) => {
   );
 };
 
-const Predicted = () => {
+const Future = () => {
   const {
     usaState,
     regions,
@@ -107,36 +107,12 @@ const Predicted = () => {
     }
   };
 
-  const predictDecision = async () => {
-    try {
-      const res = await axios.post(
-        "https://loan-predictor-669396643454.us-central1.run.app/predict",
-        {
-          loan_amount: 250000,
-          loan_term: 20,
-          income: 12000,
-          monthly_debt: 600,
-          occupancy_type: "Principal Residence",
-          loan_purpose: "Home Purchase",
-          state: "CA",
-        }
-      );
-
-      console.log(res.data);
-    } catch (error) {
-      console.log(`Error: ${error}`);
-    }
-  };
-
   return (
     <div className='min-h-screen bg-gradient-to-b from-white via-white to-blue-300 flex flex-col items-center px-6 sm:px-12 overflow-hidden'>
       <Navbar />
 
       <div className='w-full h-full py-6 flex flex-row items-center justify-between'>
-        <h1
-          className='text-[55px] font-normal text-gray-900 leading-tight font-coro'
-          onClick={() => predictDecision()}
-        >
+        <h1 className='text-[55px] font-normal text-gray-900 leading-tight font-coro'>
           Future Prices
         </h1>
 
@@ -213,4 +189,4 @@ const Predicted = () => {
   );
 };
 
-export default Predicted;
+export default Future;
