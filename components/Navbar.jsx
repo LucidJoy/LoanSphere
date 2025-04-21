@@ -7,7 +7,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Separator } from "./ui/separator";
 
 const Navbar = () => {
   const router = useRouter();
@@ -43,7 +42,7 @@ const Navbar = () => {
         </Popover>
 
         <Link
-          href='/predicted'
+          href='/future'
           className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
         >
           Future Prices

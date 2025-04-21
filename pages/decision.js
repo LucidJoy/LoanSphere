@@ -54,8 +54,6 @@ const Decision = () => {
   const [approvalProbability, setApprovalProbability] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
 
-  const router = useRouter();
-
   // get all regions from selected state
   useEffect(() => {
     try {
@@ -79,6 +77,8 @@ const Decision = () => {
 
   const predictDecision = async () => {
     try {
+      await axios.get("/api/check-limit");
+
       setPredictDecisionLoader(true);
 
       const res = await axios.post(decisionEndpoint, {
