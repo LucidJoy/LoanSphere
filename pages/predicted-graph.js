@@ -15,7 +15,7 @@ const PredictedGraph = () => {
 
   useEffect(() => {
     if (!predictGraphData?.plot) {
-      router.push("/predicted");
+      router.push("/future");
     }
   }, [predictGraphData?.plot]);
 

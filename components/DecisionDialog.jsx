@@ -27,15 +27,10 @@ const DecisionDialog = ({
             </DialogTitle>
 
             <DialogDescription>
-              <span className='text-black font-mono'>Prediction: </span>
-              {prediction}
-            </DialogDescription>
-            <DialogDescription>
-              <span className='text-black font-mono'>
-                {" "}
-                Probability of Approval:{" "}
+              <span className='text-black font-mono text-[16px]'>
+                Prediction:{" "}
               </span>
-              {probability_of_approval}
+              {prediction}
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

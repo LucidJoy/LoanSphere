@@ -61,12 +61,12 @@ const Navbar = () => {
         >
           About us
         </Link>
-        <Link
+        {/* <Link
           href='#'
           className='text-gray-700 hover:text-black hover:bg-gray-100 transition-all px-[12px] py-[6px] rounded-lg'
         >
           Contact
-        </Link>
+        </Link> */}
       </div>
       {router.pathname == "/" ? (
         <div className='space-x-4'>
